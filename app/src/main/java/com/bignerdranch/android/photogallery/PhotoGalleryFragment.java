@@ -90,7 +90,7 @@ public class PhotoGalleryFragment extends Fragment {
         @Override
         public void onBindViewHolder(PhotoHolder photoHolder, int position) {
             GalleryItem galleryItem = mGalleryItems.get(position);
-            Drawable placeholder = getResources().getDrawable(R.drawable.bill_up_close);
+            Drawable placeholder = getResources().getDrawable(R.drawable.ic_action_name);
             photoHolder.bindDrawable(placeholder);
             mThumbnailDownloader.queueThumbnail(photoHolder, galleryItem.getUrl());
         }
@@ -175,6 +175,8 @@ public class PhotoGalleryFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.d(TAG, "QueryTextChange: " + newText);
+                QueryPreferences.setStoredQuery(getActivity(), newText);
+                updateItems();
                 return false;
             }
         });
